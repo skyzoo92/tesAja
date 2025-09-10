@@ -1,16 +1,17 @@
+/// <reference types="node" />
 export declare class BinaryInfo {
-    protocolVersion: number
-    sequence: number
+    protocolVersion: number;
+    sequence: number;
     events: {
         [x: string]: {
             props: {
-                [x: string]: import("./constants").Value
-            }
+                [x: string]: any;
+            };
             globals: {
-                [x: string]: import("./constants").Value
-            }
-        }
-    }[]
-    buffer: Buffer[]
-    constructor(options?: Partial<BinaryInfo>)
+                [x: string]: any;
+            };
+        };
+    }[];
+    buffer: Buffer[];
+    constructor(options?: Partial<BinaryInfo>);
 }
