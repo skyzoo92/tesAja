@@ -1,8 +1,8 @@
 {
-    "name": "@kelvdra/bails",
-    "version": "1.4.3",
-    "description": "WhatsApp API Modification By K",
-    "keywords": [
+  "name": "@kelvdra/bails",
+  "version": "1.3.9",
+  "description": "WhatsApp API by Kelvdra",
+  "keywords": [
     "baileys",
     "baileys-mod",
     "bails",
@@ -21,21 +21,22 @@
     "multi-device",
     "modder"
   ],
-  "homepage": "https://github.com/Whiskeysockets",
+  "homepage": "https://github.com/WhiskeySockets/Baileys/",
   "repository": {
-    "url": ""
+    "url": "git@github.com:WhiskeySockets/Baileys.git"
   },
-    },
-    "license": "MIT",
-    "author": "Adhiraj Singh",
-    "main": "lib/index.js",
-    "types": "lib/index.d.ts",
-    "files": [
-        "lib/*",
-        "WAProto/*.js",
-        "engine-requirements.js"
-    ],
-    "dependencies": {
+  "license": "MIT",
+  "author": "Kelvdra",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib/**/*",
+    "WAProto/**/*"
+  ],
+  "scripts": {
+    "test": "jest"
+  },
+  "dependencies": {
         "@adiwajshing/keyed-db": "^0.2.4",
         "@hapi/boom": "^9.1.3",
         "@cacheable/node-cache": "^1.4.0",
