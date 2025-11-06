@@ -1,7 +1,7 @@
 {
   "name": "@kelvdra/bails",
   "type": "module",
-  "version": "1.4.89",
+  "version": "1.4.029",
   "description": "WhatsApp API by Kelvdra",
   "keywords": [
     "baileys",
