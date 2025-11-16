@@ -45,6 +45,7 @@
     "axios": "^1.12.1",
     "audio-decode": "^2.2.2", 
     "cache-manager": "^5.7.6", 
+    "chalk": "^4.1.2",
     "fflate": "^0.8.2", 
     "lodash": "^4.17.21",
     "libsignal": "npm:@meta.inc/libsignal@*",
