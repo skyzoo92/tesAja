@@ -514,9 +514,8 @@ conn.sendMessage(m.chat, {
 ```
 ### SendMessage Carousel
 ```javascript
-func nya kyk gini, nanti ku taro ke readme
- await conn.sendMessage(
-    m.chat,
+await sock.sendMessage(
+    jid,
     {
         carouselMessage: {
             caption: "Klik Url",
