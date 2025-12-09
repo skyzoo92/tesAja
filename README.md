@@ -37,6 +37,7 @@
         - [SendMessage Carousel](#sendMessage-Carousel)
         - [Request Payment](#request-payment)
         - [Event Message](#event-message)
+        - [Interactive Message with Native Flow](#Interactive-Message-with-Native-Flow)
         - [Interactive](#interactive)
         - [Forward Messages](#forward-messages)
         - [Location Message](#location-message)
@@ -105,34 +106,38 @@ const { default: makeWASocket } = require("@kelvdra/baileys")
 WhatsApp supports **multi-device API**, allowing Baileys to act as a secondary WhatsApp Web client.  
 You can connect via **QR Code** or **Pairing Code**.
 
-### 📷 QR Code Login
+# How To Connect To Whatsapp
+## With QR Code
 ```javascript
-const { default: makeWASocket, Browsers } = require("@kelvdra/baileys");
+const {
+  default: makeWASocket
+} = require('@kelvdra/bails');
 
-const sock = makeWASocket({
-    browser: Browsers.ubuntu('My App'),
-    printQRInTerminal: true
-});
+const client = makeWASocket({
+  browser: ['Ubuntu', 'Chrome', '20.00.1'],
+  printQRInTerminal: true
+})
 ```
-> 💡 Scan the QR code with WhatsApp on your phone to log in.
 
-### 🔑 Pairing Code Login
+## Connect With Number
 ```javascript
-const { default: makeWASocket } = require("@kelvdra/baileys");
+const {
+  default: makeWASocket,
+  fetchLatestWAWebVersion
+} = require('@kelvdra/bails');
 
-const sock = makeWASocket({
-    printQRInTerminal: false
+const client = makeWASocket({
+  browser: ['Ubuntu', 'Chrome', '20.00.1'],
+  printQRInTerminal: false,
+  version: fetchLatestWAWebVersion()
+  // Other options
 });
 
-if (!sock.authState.creds.registered) {
-    const number = '6281234567890'; // no symbols, only numbers
-    const code = await sock.requestPairingCode(number);
-    console.log(code);
-}
-```
-> ⚠️ **Note:** Pairing code works only with one device at a time.
+const number = "628XXXXX";
+const code = await client.requestPairingCode(number.trim) /* Use : (number, "YYYYYYYY") for custom-pairing */
 
----
+console.log("Ur pairing code : " + code)
+```
 
 ## 💡 Important Notes About Socket Config
 
@@ -553,6 +558,84 @@ func nya kyk gini, nanti ku taro ke readme
     { quoted: m },
     conn
 );
+```
+
+### Interactive Message with Native Flow
+Send interactive messages with buttons, copy actions, and native flow features:
+
+```javascript
+await sock.sendMessage(jid, {    
+    interactiveMessage: {      
+        title: "Hello World",      
+        footer: "telegram: @draa82",      
+        image: { url: "https://example.com/image.jpg" },      
+        nativeFlowMessage: {        
+            messageParamsJson: JSON.stringify({          
+                limited_time_offer: {            
+                    text: "idk hummmm?",            
+                    url: "t.me/draa82",            
+                    copy_code: "kelvdra 1437",            
+                    expiration_time: Date.now() * 999          
+                },          
+                bottom_sheet: {            
+                    in_thread_buttons_limit: 2,            
+                    divider_indices: [1, 2, 3, 4, 5, 999],            
+                    list_title: "kelvdra",            
+                    button_title: "kelvdra"          
+                },          
+                tap_target_configuration: {            
+                    title: " X ",            
+                    description: "bomboclard",            
+                    canonical_url: "https://t.me/draa82",            
+                    domain: "shop.example.com",            
+                    button_index: 0          
+                }        
+            }),        
+            buttons: [          
+                {            
+                    name: "single_select",            
+                    buttonParamsJson: JSON.stringify({              
+                        has_multiple_buttons: true            
+                    })          
+                },          
+                {            
+                    name: "call_permission_request",            
+                    buttonParamsJson: JSON.stringify({              
+                        has_multiple_buttons: true            
+                    })          
+                },          
+                {            
+                    name: "single_select",            
+                    buttonParamsJson: JSON.stringify({              
+                        title: "Hello World",              
+                        sections: [                
+                            {                  
+                                title: "title",                  
+                                highlight_label: "label",                  
+                                rows: [                    
+                                    {                      
+                                        title: "@kelvdra",                      
+                                        description: "love you",                      
+                                        id: "row_2"                    
+                                    }                  
+                                ]                
+                            }              
+                        ],              
+                        has_multiple_buttons: true            
+                    })          
+                },          
+                {            
+                    name: "cta_copy",            
+                    buttonParamsJson: JSON.stringify({              
+                        display_text: "copy code",              
+                        id: "123456789",              
+                        copy_code: "ABC123XYZ"            
+                    })          
+                }        
+            ]      
+        }    
+    }  
+}, { quoted: m });
 ```
 
 #### Interactive
